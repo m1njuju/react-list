@@ -9,7 +9,6 @@ class ListClass extends Component {
     this.listItems = this.numbers.map((number, index) => (
       <li key={index}>{number}</li>
     ));
-
     this.state = {
       // 배열값을 사용해 줄 때는 키 값을 위한 id값을 추가
       season: [
@@ -36,20 +35,26 @@ class ListClass extends Component {
     // 클래스형에서는 setState를 통해서 값을 수정한다
     this.setState({ season: nextSeason });
   };
-  // onClick에 들어가는 이벤트는 동일하게 작성
 
   // 바뀐 값을 가져오는 함수
+  // setState()를 사용할 때는 항상 {(state에 작성한 속성이름):값}으로 넣어준다
+  // 들어가는 값 : 1, "문자열" , 변수로 넣어둔 값
   changeText = (e) => this.setState({ [e.target.name]: e.target.value });
 
   //배열에 값을 넣는 함수
   getText = () => {
+    // 아래 값은 state의 값을 직접적으로 바꾸기 때문에 권장하지 않는다
     //this.state.season.push(this.state.inputText);
+
+    // concat을 이용하여 두 개의 값이 더한 배열을 만든다
     const nextSeason = this.state.season.concat({
       id: this.state.inputId,
       text: this.state.inputText,
     });
-    this.setState({ inputId: this.state.inputId + 1 });
+
     this.setState({ season: nextSeason });
+    // prevState를 통해 this.state의 값을 가져와서 사용하였다
+    this.setState((prevState) => ({ inputId: prevState.inputId + 1 }));
   };
 
   render() {
