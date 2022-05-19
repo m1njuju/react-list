@@ -9,6 +9,7 @@ class ListClass extends Component {
     this.listItems = this.numbers.map((number, index) => (
       <li key={index}>{number}</li>
     ));
+
     this.state = {
       // 배열값을 사용해 줄 때는 키 값을 위한 id값을 추가
       season: [
@@ -27,7 +28,6 @@ class ListClass extends Component {
         { id: 3, name: "Jhon" },
       ],
     };
-    this.deleteSeason = this.deleteSeason.bind(this);
   }
   // 함수 들고와서 클래스형에서 사용할 수 있도록 수정
   deleteSeason = (id) => {
@@ -71,6 +71,7 @@ class ListClass extends Component {
             <li
               key={s.id}
               onClick={() => {
+                // 이벤트 안에서 인수를 전달할 때에는 화살표 함수로 감싸서 전달
                 this.deleteSeason(s.id);
               }}
             >
